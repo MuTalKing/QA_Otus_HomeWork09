@@ -41,7 +41,7 @@ public class OtusTitleTests {
         AssertionError assertionError = null;
 
         try{
-            Assertions.assertEquals("Онлайн‑курсы для профессионалов, дистанционное обучение современным профессиям", actualTitle);
+            Assertions.assertEquals(actualTitle, "Онлайн‑курсы для профессионалов, дистанционное обучение современным профессиям");
         }
         catch(AssertionError aEr){
             assertionError = aEr;
