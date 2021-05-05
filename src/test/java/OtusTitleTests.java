@@ -1,8 +1,11 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.*;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.io.ByteArrayInputStream;
 import java.util.concurrent.TimeUnit;
 
 
@@ -38,13 +41,13 @@ public class OtusTitleTests {
     }
 
     @Test
-    public void checkUrl2(){
+    public void checkTitle(){
         driver.get("https://otus.ru/");
-        String actualUrl = driver.getCurrentUrl();
+        String actualTitle = driver.getTitle();
         AssertionError assertionError = null;
 
         try{
-            Assertions.assertEquals("https://otus.ru/", actualUrl);
+            Assertions.assertEquals(actualTitle, "Онлайн‑курсы для профессионалов, дистанционное обучение современным профессиям");
         }
         catch(AssertionError aEr){
             assertionError = aEr;
