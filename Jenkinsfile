@@ -31,7 +31,6 @@ pipeline {
     }
     post {
                 always {
-
                   script {
                       def summary = junit '**/build/test-results/test/*.xml'
                     println("summary generated")
@@ -41,6 +40,7 @@ pipeline {
                         body: """${currentBuild.currentResult}: Job ${env.JOB_NAME}, build ${env.BUILD_NUMBER}, branch - ${branch}\nTest Summary - ${summary.totalCount}, Failures: ${summary.failCount}, Skipped: ${summary.skipCount}, Passed: ${summary.passCount}\nMore info at: ${env.BUILD_URL}""",
                         to: "mutalking@gmail.com"
                     )
+                    slackSend color: "good", message: "Job: ${env.JOB_NAME} with buildnumber ${env.BUILD_NUMBER} was successful"
 
                     } else {
                     emailext (
@@ -48,6 +48,7 @@ pipeline {
                         body: """${currentBuild.currentResult}: Job ${env.JOB_NAME}, build ${env.BUILD_NUMBER}, branch - ${branch}\nTest Summary - ${summary.totalCount}, Failures: ${summary.failCount}, Skipped: ${summary.skipCount}, Passed: ${summary.passCount}\nMore info at: ${env.BUILD_URL}""",
                         to: "mutalking@gmail.com"
                     )
+                    slackSend color: "danger", message: "Job: ${env.JOB_NAME} with buildnumber ${env.BUILD_NUMBER} was failed"
                     }
                   }
                 }
