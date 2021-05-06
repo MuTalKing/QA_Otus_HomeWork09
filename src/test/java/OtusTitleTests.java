@@ -41,12 +41,23 @@ public class OtusTitleTests {
     }
 
     @Test
-    public void checkTitle(){
+    public void checkUrl2(){
         driver.get("https://otus.ru/");
-        String actualTitle = driver.getTitle();
+        String actualUrl = driver.getCurrentUrl();
+        AssertionError assertionError = null;
 
-            Assertions.assertEquals(actualTitle, "Онлайн‑курсы для профессионалов, дистанционное обучение современным профессиям");
-
+        try{
+            Assertions.assertEquals("https://otus.ru/", actualUrl);
+        }
+        catch(AssertionError aEr){
+            assertionError = aEr;
+        }
+        finally{
+            if(assertionError == null){
+            }else{
+                throw assertionError;
+            }
+        }
     }
 
     @AfterAll
